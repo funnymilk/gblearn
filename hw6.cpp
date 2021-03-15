@@ -10,7 +10,7 @@
 #include <fstream>
 #include <cstring>
 
-int main(){
+int main(int argc, const char** argv){
 //задание 1*
 	//открытие потока
 	std::ofstream file1("hw1.txt", std::ofstream::app);
@@ -61,16 +61,26 @@ int main(){
 
 
 //задание3
+	//std::cout << argv[1];
+	std::string word;
+	std::ifstream sfile("testfile.txt"); 					//поток для чтения из файла
+	int d = 0;
+	while (!sfile.eof()) {
+		sfile >> word;
+		if (word == argv[1]) d++;
+	}
 	
-
-
+	if (d > 0) {
+		std::cout << "There is '" << argv[1] << "'" << " in the file!" << std::endl;
+	}
+	else {
+		std::cout << "There isn't '" << argv[1] << "'" << " in the file!" << std::endl;
+	}
+	sfile.close();
+	
 	return 0;
 }
 
-	//напоминание
-	/*
-	*buff = 'o';
-	for (int i=0; i<f.length(); i++){
-		std::cout << *buff << " ";
-	}*/
+
+
 
