@@ -13,8 +13,8 @@
 int main(int argc, const char** argv){
 //задание 1*
 	//открытие потока
-	std::ofstream file1("hw1.txt", std::ofstream::app);
-	std::ofstream file2("hw2.txt", std::ofstream::app);
+	std::ofstream file1("hw1.txt");
+	std::ofstream file2("hw2.txt");
 	//file << "test" << std::endl;
 	for (int i=0; i<50; i++){
 		file1 << "l" << " ";
