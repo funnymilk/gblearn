@@ -5,7 +5,7 @@ int bintodec(int dec);
 int expo(int a, int b);
 int rexpo(int a, int b);
 int chstep(int a, int b);
-int routes(int x, int y);
+int routes(int x, int y, int b);
 
 
 int main()
@@ -17,7 +17,7 @@ int main()
     int sy = 5;
     int a[5][5];
     memset(a, 0, sizeof(a));
-    a[2][1] = 1;
+    a[2][2] = 1;
     for (int y= 0; y < sy; ++y){
         for (int x = 0; x < sx; ++x){
                 printf("%5d", a[x][y]);
@@ -27,10 +27,7 @@ int main()
             printf("\n");
     for (int y= 0; y < sy; ++y){
         for (int x = 0; x < sx; ++x){
-            if (a[x][y] == 0) {
-                printf("%5d", routes(x, y));
-            }
-            else printf("%5d", routes(x, y));
+           printf("%5d", routes(x, y, a[x][y]));
         }
         printf("\n");
     }
@@ -74,12 +71,16 @@ int chstep(int a, int b){
         } else return a;
 }
 
-int routes(int x, int y){
-
-    if (x == 0 && y == 0)
-        return 0;
-    else if (x == 0 ^ y == 0)
-        return 1;
-    else
-        return routes(x, y - 1) + routes(x - 1, y);
+int routes(int x, int y, int b){
+        if (b == 1) return 0;
+        if (x == 0 && y == 0) return 0;
+        else if (x == 0) {
+             if ((routes(x, y-1, b) == 0 && y !=1 )) return 0;
+             return 1;
+        }
+        else if (y == 0) {
+            if ((routes(x-1, y, b) == 0 && x != 1)) return 0;
+            return 1;
+        }
+        else return routes(x, y - 1, b) + routes(x - 1, y, b);
 }
