@@ -2,7 +2,6 @@
 #include "func.h"
 #include <math.h>
 
-
 void bubble(int *arr, int lenrow, int lencol);
 void tpk(double *arr, int len);
 
@@ -21,17 +20,10 @@ int main()
 
     for (int i=0; i<11; i++){
         scanf("%lf", &b[i]);
-        //b[i] *= 1.0;
     }
     printer1(b, 11);
     tpk(b, 11);
     printer1(b, 11);
-
-    //printf("%f", sqrt(16.0));
-
-
-
-
 
     return 0;
 }
@@ -64,13 +56,9 @@ void tpk(double *arr, int len){
         arr[i] = arr[5*2 - i];
         arr[5*2 - i] = tmp;
     }
-
-
-
     for (i=0; i < len; i++){
         tmp = sqrt(fabs(arr[i])) + 5.0*pow(arr[i],3);
         if (tmp > 400) printf("Результат вычисления элемента %d превышает 400\n", i);
     }
-
 }
 
