@@ -3,15 +3,19 @@
 
 void qsrt(int *arr, int right);
 void hoar(int *arr, int left, int right);
+void block(int *arr, int size);
+void block2(int *arr, int size);
 int main()
 {
     printf("Class7!\n");
-    int size = 25;
+    int size = 12;
     int a[size];
     initarray(a, size);
     printer1int(a, size);
-    qsrt(a, size-1);
+    //qsrt(a, size-1);
     //hoar(a, 0, size-1);
+
+    block2(a, size);
     printer1int(a, size);
     return 0;
 }
@@ -72,4 +76,49 @@ void hoar(int *arr, int left, int right){
     } while (l <= j);
     if(left < j) hoar(arr, left, j);
     if(l < right) hoar(arr, l, right);
+}
+void block2(int *arr, int size){
+    const int max = size;
+    const int b = 10; // заменить на 2
+    //очистили корзины
+    int basket[b][max+1];
+    for (int i=0; i<b; i++){
+        basket[i][max] = 0;
+    }
+    for (int digit = 1; digit < 1000000000; digit*=10) {
+         for (int i=0; i<max; i++) {
+             int d = (arr[i] / digit) % b;
+             basket[d][basket[d][max]++] = arr[i];
+         }
+         int idx = 0;
+         for (int i = 0; i<b; ++i){
+             for (int j=0; j < basket[i][max]; ++j){
+                 arr[idx++] = basket[i][j];
+             }
+             basket[i][max] = 0;
+         }
+     }
+}
+
+void block(int *arr, int size){
+    const int max = size;
+    const int b = 10;
+    int basket[b][max+1];
+    for (int i=0; i<b; i++){
+        basket[i][max] = 0;
+    }
+     for (int digit = 1; digit < 1000000000; digit*=10) {
+         for (int i=0; i<max; i++) {
+             int d = (arr[i] / digit) % b;
+
+             basket[d][basket[d][max]++] = arr[i];
+         }
+         int idx = 0;
+         for (int i = 0; i<b; ++i){
+             for (int j=0; j < basket[i][max]; ++j){
+                 arr[idx++] = basket[i][j];
+             }
+             basket[i][max] = 0;
+         }
+     }
 }
