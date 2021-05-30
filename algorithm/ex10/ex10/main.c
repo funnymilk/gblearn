@@ -154,33 +154,56 @@ void printList(List *list){
 
 void cpl(List *l, List *d){
     Nodel *current = l->head;
-    do {
+    if (current == NULL){
+        printNodel(current);
+    } else do {
         ins(d, current->dat);
         current = current->next;
     } while (current != NULL);
 }
 
+void sortOrNot(List *lst){
+    Nodel *current = lst->head;
+    boolean check = true;
+    if (current == NULL){
+        printNodel(current);
+    } else while (current != NULL) {
+        if (current->next != NULL) {
+            if (current->dat <= current->next->dat) {
+                check = true;
+            } else {
+                printf("Список не отсортирован!\n");
+                check = false;
+                break;
+            }
+    }
+    current = current->next;
+    }
+    if (check && (current == NULL)) printf("Список отсортирован с:\n");
+}
+
 int main()
 {
- /*   T p[20];
+   /* T p[20];
     scanf("%s", p);
     //printf("%s\n", p);
     Stack *st = (Stack*) malloc(sizeof(Stack));
     init(st);
     checkPSP(st, p);
-    printOneLinkCharStack(st); */
+    printOneLinkCharStack(st);*/
 
     List *lst = (List*) malloc(sizeof(List));
     List *lst2 = (List*) malloc(sizeof(List));
     init(lst);
     printList(lst);
     ins(lst, 1);
-    ins(lst, 3);
+    ins(lst, 8);
     ins(lst, 6);
     printList(lst);
     init(lst2);
     cpl(lst, lst2);
-    printList(lst2);
+    //printList(lst2);
 
+    sortOrNot(lst2);
     return 0;
 }
