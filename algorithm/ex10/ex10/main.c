@@ -15,11 +15,21 @@ typedef struct{
     int size;
 } Stack;
 
+typedef struct Nodel {
+    int dat;
+    struct Nodel *next;
+} Nodel;
+
+typedef struct{
+    Nodel *head;
+    int size;
+} List;
+
+//----------------------------------------------------------------------------------------
 void init(Stack *stack){
     stack->head = NULL;
     stack->size = 0;
 }
-
 
 boolean push(Stack *stack, T value){
     Node *tmp = (Node*) malloc(sizeof(Node));
@@ -95,25 +105,82 @@ void checkPSP(Stack *stack, T p[20]){
     if (check && (stack->size == 0)) printf("Скобочная последовательность правильная\n");
     else printf("Скобочная последовательность неправильная\n");
 }
+//-----------------------------------------------------------------------------------------
 
+void listinit(List *list){
+    list->head = NULL;
+    list->size = 0;
+}
+
+void ins(List *list, int data){
+    Nodel *new = (Nodel*) malloc(sizeof (Nodel));
+    new->dat = data;
+    new->next = NULL;
+
+    Nodel *current = list->head;
+    if (current == NULL){
+        list->head = new;
+        list->size++;
+    } else {
+        while (current->next != NULL){
+            current = current->next;
+        }
+        current->next = new;
+        list->size++;
+    }
+
+}
+
+void printNodel(Nodel *n){
+    if (n == NULL) {
+        printf("[]");
+        return;
+    }
+    printf("[%d] ", n->dat);
+}
+
+void printList(List *list){
+    Nodel *current = list->head;
+    if (current == NULL){
+        printNodel(current);
+    } else {
+        do{
+            printNodel(current);
+            current = current->next;
+        } while (current != NULL);
+    }
+    printf(" Size: %d \n", list->size);
+}
+
+void cpl(List *l, List *d){
+    Nodel *current = l->head;
+    do {
+        ins(d, current->dat);
+        current = current->next;
+    } while (current != NULL);
+}
 
 int main()
 {
-    T p[20];
+ /*   T p[20];
     scanf("%s", p);
     //printf("%s\n", p);
-
     Stack *st = (Stack*) malloc(sizeof(Stack));
     init(st);
     checkPSP(st, p);
-    printOneLinkCharStack(st);
-    /*
+    printOneLinkCharStack(st); */
 
-    push(st, 'h');
-    push(st, 'k');
-    push(st, 'm');
-    printOneLinkCharStack(st);
-    printf("%c \n", pop(st));
-    printOneLinkCharStack(st);*/
+    List *lst = (List*) malloc(sizeof(List));
+    List *lst2 = (List*) malloc(sizeof(List));
+    init(lst);
+    printList(lst);
+    ins(lst, 1);
+    ins(lst, 3);
+    ins(lst, 6);
+    printList(lst);
+    init(lst2);
+    cpl(lst, lst2);
+    printList(lst2);
+
     return 0;
 }
