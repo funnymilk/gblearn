@@ -33,21 +33,21 @@ void reshuffle(T cryp[256]){
     }
     char buff;
     char key = 'carts';
-    for (int i = 0; i < 5; i++){
-        for (int j = 0; j < 5; j++){
+//    for (int i = 0; i < 5; i++){
+//        for (int j = 0; j < 5; j++){
 
-            if ()
+//            if ()
 
 
 
-                if (j == 2){
-                    buff = mas[i][j];
-                    mas[i][j] = mas[i][j+1];
-                    mas[i][j+1] = buff;
-                }
-        }
-    }
-    ;
+//                if (j == 2){
+//                    buff = mas[i][j];
+//                    mas[i][j] = mas[i][j+1];
+//                    mas[i][j+1] = buff;
+//                }
+//        }
+//    }
+//    ;
 
 
 
@@ -62,22 +62,23 @@ void reshuffle(T cryp[256]){
 }
 
 
+
 int main()
 {
     char s[256] = "Hello, my dear friend";
      char *k;
-//    //n = s;
-//    int len = 0;
-//    printf("original = ");
-//    while (s[len] != 0){
-//        printf("%c", s[len]);
-//        len++;
-//    }
+    //n = s;
+    int len = 0;
+    printf("original = ");
+    while (s[len] != 0){
+        printf("%c", s[len]);
+        len++;
+    }
     printf("\n");
-    //printf("crypto = %c", cezar(s, 3));
-    //strcpy(n, cezar(s,3));
-    //cezar(s,3);
-     printf("\n");
+//    printf("crypto = %c", cezar(s, 3));
+//    strcpy(n, cezar(s,3));
+    cezar(s,3);
+   printf("\n");
    reshuffle(s);
 
     printf("\n");
